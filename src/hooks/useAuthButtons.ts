@@ -9,7 +9,6 @@ import { store } from "@/redux"
 const useAuthButtons = () => {
 	const { pathname } = useLocation()
 	const route = searchRoute(pathname, routerArray)
-  console.log(route)
 	return {
 		BUTTONS: store.getState().auth.authButtons[route.meta!.key!] || {}
 	}
