@@ -5,7 +5,8 @@ import { wrapperEnv } from "./src/utils/getEnv"
 import { visualizer } from "rollup-plugin-visualizer"
 import { createHtmlPlugin } from "vite-plugin-html"
 import viteCompression from "vite-plugin-compression"
-// import eslintPlugin from "vite-plugin-eslint"
+import legacy from "@vitejs/plugin-legacy"
+import eslintPlugin from "vite-plugin-eslint"
 
 // https://vitejs.dev/config/
 export default defineConfig((mode: ConfigEnv): UserConfig => {
@@ -24,9 +25,9 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 		css: {
 			preprocessorOptions: {
 				less: {
-					// modifyVars: {
-					// 	"primary-color": "#1DA57A",
-					// },
+					modifyVars: {
+						"primary-color": "#4e6ef2",
+					},
 					javascriptEnabled: true,
 					additionalData: "@import \"@/styles/var.less\";",
 				},
@@ -51,6 +52,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 		// plugins
 		plugins: [
 			react(),
+      // * html标签 <title>value</title>
 			createHtmlPlugin({
 				inject: {
 					data: {
@@ -59,18 +61,21 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 				},
 			}),
 			// * EsLint 报错信息显示在浏览器界面上
-			// eslintPlugin(),
+			eslintPlugin(),
 			// * 是否生成包预览
 			viteEnv.VITE_REPORT && visualizer(),
 			// * gzip compress
-			viteEnv.VITE_BUILD_GZIP &&
-				viteCompression({
-					verbose: true,
-					disable: false,
-					threshold: 10240,
-					algorithm: "gzip",
-					ext: ".gz",
-				}),
+			viteEnv.VITE_BUILD_GZIP && viteCompression({
+        verbose: true,
+        disable: false,
+        threshold: 10240,
+        algorithm: "gzip",
+        ext: ".gz",
+      }),
+      legacy({
+        targets: ["ie >= 11"],
+        additionalLegacyPolyfills: ["regenerator-runtime/runtime"]
+      })
 		],
 		esbuild: {
 			pure: viteEnv.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : [],
