@@ -1,7 +1,7 @@
 import NProgress from "@/config/nprogress"
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
 import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading"
-import { ResultData } from "@/api/interface"
+import { ResultData } from "./interface"
 import { ResultEnum } from "@/enums/httpEnum"
 import { checkStatus } from "./helper/checkStatus"
 import { AxiosCanceler } from "./helper/axiosCancel"

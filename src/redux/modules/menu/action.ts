@@ -19,6 +19,8 @@ interface MenuProps {
 	type: string;
 	menuList: Menu.MenuOptions[];
 }
+
+
 // * redux-thunk
 export const getMenuListActionThunk = () => {
 	return async (dispatch: Dispatch<MenuProps>) => {

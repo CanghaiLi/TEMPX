@@ -5,7 +5,7 @@ import { wrapperEnv } from "./src/utils/getEnv"
 import { visualizer } from "rollup-plugin-visualizer"
 import { createHtmlPlugin } from "vite-plugin-html"
 import viteCompression from "vite-plugin-compression"
-import eslintPlugin from "vite-plugin-eslint"
+// import eslintPlugin from "vite-plugin-eslint"
 
 // https://vitejs.dev/config/
 export default defineConfig((mode: ConfigEnv): UserConfig => {
@@ -59,7 +59,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 				},
 			}),
 			// * EsLint 报错信息显示在浏览器界面上
-			eslintPlugin(),
+			// eslintPlugin(),
 			// * 是否生成包预览
 			viteEnv.VITE_REPORT && visualizer(),
 			// * gzip compress
